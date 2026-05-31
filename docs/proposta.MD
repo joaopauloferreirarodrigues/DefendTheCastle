@@ -8,18 +8,16 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 Escreva aqui o nome provisório do jogo.
 
-Exemplo:
-
-> Corrida dos Obstáculos
+Defend the Castle
 
 ## 2. Integrantes do grupo
 
 Liste os integrantes do grupo.
 
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+- Nome 1:Dimitry Gonzales
+- Nome 2: João Paulo Ferreira Rodrigues
+- Nome 3: Pedro Henrique Soares Silva
+- Nome 4: Samuel Ferreira Guimarães
 
 ## 3. Tipo de jogo
 
@@ -40,9 +38,9 @@ Exemplos:
 - jogo de clique rápido;
 - jogo de sobrevivência simples.
 
-Tipo escolhido pelo grupo:
+Tipo escolhido pelo grupo: 
 
-> Escreva aqui.
+Jogo de defesa com ondas de inimigos(estilo Space Invaders)
 
 ## 4. Descrição geral do jogo
 
@@ -57,7 +55,7 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+Na tela aparece um castelo abaixo que o jogador deve proteger. O jogador controla um arqueiro, se move para a esquerda ou direita na frente do castelo. O arqueiro dispara flechas automaticamente na direção dos inimigos. O jogador precisa se posicionar para eliminar os inimigos. Cada onda de inimigos fica mais rápida e numerosa, aumentando a dificuldade progressivamente.
 
 ## 5. Objetivo do jogador
 
@@ -75,7 +73,7 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+Sobreviver ao maior número de ondas possível, eliminando todos os inimigos.
 
 ## 6. Regras principais
 
@@ -91,11 +89,11 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+- Regra 1: O arqueiro dispara automaticamente a cada intervalo fixo de tempo.
+- Regra 2: A cada onda concluída, a velocidade e a quantidade de inimigos aumentam
+- Regra 3: O arqueiro começa com 3 vidas
+- Regra 4: Cada ataque inimigo que toca o arqueiro remove 1 vida
+- Regra 5: A partida termina quando o arqueiro perde todas as suas vidas.
 
 ## 7. Condição de vitória
 
@@ -111,7 +109,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+A ideia é sobreviver ao máximo de ondas possível
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +125,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+O jogo termina quando o arqueiro perde todas as suas 3 vidas
 
 ## 9. Elementos previstos no jogo
 
@@ -137,21 +135,24 @@ Descreva os principais elementos que farão parte do jogo.
 
 Exemplo:
 
-> Um personagem controlado pelas setas do teclado.
+Um arqueiro
 
 Descrição:
 
-> Escreva aqui.
+Controlado pelas teclas A e D (ou setas para esquerda/direita), ele atira flechas em um intervalo de tempo regular
 
 ## Obstáculos, inimigos ou desafios
 
 Exemplo:
 
-> Obstáculos aparecem em posições aleatórias e devem ser evitados.
+Morcego: rápido, fraco (1 ponto de vida)
+Esqueleto: velocidade média, resistência média (2 pontos de vida)
+Orc: lento, resistente (3 pontos de vida)
+
 
 Descrição:
 
-> Escreva aqui.
+Três tipos diferentes de inimigos podem surgir em ondas, atirando na direção do arqueiro
 
 ## Itens, alvos ou objetos de interação
 
@@ -161,7 +162,9 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+Flechas disparadas automaticamente pelo arqueiro
+Poção de vida que restaura vida do arqueiro
+Inimigos derrotados somam pontos ao placar
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -171,7 +174,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+O arqueiro começa com 3 vidas exibidas na tela. A pontuação é acumulada a cada inimigo eliminado. O número da onda atual é exibido no topo da tela.
 
 ## 10. Controles previstos
 
@@ -188,9 +191,9 @@ Exemplo:
 
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+- Tecla/comando: A ou Seta para esquerda: Movem o personagem para esquerda
+- Tecla/comando: D ou Seta para direita: Movem o personagem para direita
+- Tecla/comando: Esc: Menu de pausa
 
 ## 11. Organização inicial do código
 
@@ -206,7 +209,15 @@ Exemplo:
 
 Organização planejada:
 
-> Escreva aqui.
+main.py — inicia o jogo e executa o loop principal;
+src/config.py — configurações globais (tamanho da tela, cores, FPS, velocidades);
+src/jogador.py — arqueiro (movimento e disparo automático);
+src/inimigos.py — inimigos (Morcego, Orc, Esqueleto) com comportamentos distintos;
+src/flecha.py — classe da flecha e lógica de colisão;
+src/ondas.py — geração e progressão das ondas;
+src/hud.py — exibição de pontuação, vidas do arqueiro e número da onda;
+src/dados.py — leitura e escrita do ranking em arquivo
+
 
 
 ## 12. Recursos externos previstos
@@ -222,7 +233,9 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
+- Modelos gratuitos de arqueiro, morcego, orc e esqueleto
+- Imagem de castelo medieval como parte do cenário
+- Sons de flecha disparada 
 
 Caso não pretenda utilizar recursos externos, escreva:
 
@@ -245,9 +258,9 @@ Exemplos:
 
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Implementar o disparo automático
+- Dificuldade 2: Detectar o dano causado e sofido
+- Dificuldade 3: Criar as ondas progressivas 
 
 ## 14. Escopo mínimo para a entrega final
 
@@ -261,7 +274,7 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+A versão mínima do jogo terá: um arqueiro controlado pelo teclado, disparo automático de flechas, três tipos de inimigos com vidas diferentes, ondas de inimigos, sistema de 3 vidas para o arqueiro, pontuação exibida na tela e tela de fim de jogo com pontuação final.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
