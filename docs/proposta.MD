@@ -109,7 +109,7 @@ Exemplos:
 
 Condição de vitória:
 
-A ideia é sobreviver ao máximo de ondas possível
+Sobreviver a 15 hordas
 
 ## 8. Condição de derrota ou encerramento
 
@@ -261,6 +261,7 @@ Dificuldades previstas:
 - Dificuldade 1: Implementar o disparo automático
 - Dificuldade 2: Detectar o dano causado e sofido
 - Dificuldade 3: Criar as ondas progressivas 
+- Dificuldade 4: "Balancear" o jogo 
 
 ## 14. Escopo mínimo para a entrega final
 
