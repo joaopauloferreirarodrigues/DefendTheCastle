@@ -3,11 +3,29 @@ LARGURA_TELA = 800
 ALTURA_TELA = 600
 FPS = 60
 
-TITULO_JOGO = "Projeto Final - Pygame"
+TITULO_JOGO = "Defend the Castle"
+
 
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
-CINZA = (212,212,212)
+CINZA = (212, 212, 212)
+
+
+JOGADOR_VELOCIDADE = 5
+JOGADOR_VIDAS = 3
+JOGADOR_LARGURA = 40
+JOGADOR_ALTURA = 60
+INTERVALO_DISPARO = 800  # milissegundos entre os disparos 
+
+
+FLECHA_VELOCIDADE = 10
+FLECHA_LARGURA = 20
+FLECHA_ALTURA = 6
+
+
+INIMIGO_LARGURA = 36
+INIMIGO_ALTURA = 36
+
 
 CAMINHO_RECORDE = "data/recorde.txt"
 CAMINHO_SPRITES = "assets/imagens/spritesheet.bmp"

@@ -8,6 +8,16 @@ from src.config import (
     CINZA,
     CAMINHO_RECORDE,
     CAMINHO_SPRITES,
+    JOGADOR_ALTURA,
+    JOGADOR_LARGURA,
+    JOGADOR_VELOCIDADE,
+    JOGADOR_VIDAS,
+    INIMIGO_ALTURA,
+    INIMIGO_LARGURA,
+    INTERVALO_DISPARO,
+    FLECHA_ALTURA,
+    FLECHA_LARGURA,
+    FLECHA_VELOCIDADE,
 )
 
 from src.funcoes import (
@@ -27,7 +37,6 @@ from src.dados import (
 def executar_jogo():
     """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
     pygame.init()
-    
 
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
     pygame.display.set_caption(TITULO_JOGO)
@@ -36,31 +45,27 @@ def executar_jogo():
     rodando = True
 
     # 1. Carregando as imagens recortadas do Spritesheet
-
-
-    # Jogador: usando tamanho 110x110 para capturar o quadrado perfeitamente
     player_image = pegar_sprite(CAMINHO_SPRITES, x=110, y=120, width=190, height=190, scale=0.5)
-
-    # Gema pequena: usando tamanho 64x64
-    gem_image    = pegar_sprite(CAMINHO_SPRITES, x=900, y=690, width=200, height=200, scale=0.5)
-
-    # Morcego: usando tamanho 180x120 por causa das asas abertas
     bat_image    = pegar_sprite(CAMINHO_SPRITES, x=905, y=1060, width=200, height=130, scale=0.5)
-    
+    flecha_image = pegar_sprite(CAMINHO_SPRITES, x=1950, y=685, width=20, height=40, scale=1)
+
+
     # 2. Criando a estrutura de Sprites usando Dicionários
     jogador = {
         "imagem": player_image,
-        "rect": player_image.get_rect(topleft=(100, 100))
+        "rect": player_image.get_rect(topleft=(370, 480))
     }
 
-    gema = {
-        "imagem": gem_image,
-        "rect": gem_image.get_rect(topleft=(500, 300))
-    }
-    
     inimigo = {
         "imagem": bat_image,
-        "rect": bat_image.get_rect(topleft=(200, 500))
+        "rect": bat_image.get_rect(topleft=(350, 100))
+    }
+
+    # Flecha: um retângulo que sobe pela tela
+    flecha = {
+        "imagem": flecha_image,
+        "rect": flecha_image.get_rect(),
+        "ativa": False
     }
 
     velocidade = 5
@@ -78,46 +83,37 @@ def executar_jogo():
 
         teclas = pygame.key.get_pressed()
 
-        # Movimentação alterando direto os eixos X e Y do retângulo do jogador
+        # Movimentação esquerda e direita
         if teclas[pygame.K_LEFT]:
-            jogador["rect"].x -= velocidade
+            jogador["rect"].x -= JOGADOR_VELOCIDADE
         if teclas[pygame.K_RIGHT]:
-            jogador["rect"].x += velocidade
-        if teclas[pygame.K_UP]:
-            jogador["rect"].y -= velocidade
-        if teclas[pygame.K_DOWN]:
-            jogador["rect"].y += velocidade
+            jogador["rect"].x += JOGADOR_VELOCIDADE
 
-        # Limitando o jogador dentro das bordas da tela usando as propriedades do Rect
+        # Limitando dentro das bordas da tela
         jogador["rect"].x = limitar_valor(jogador["rect"].x, 0, LARGURA_TELA - jogador["rect"].width)
-        jogador["rect"].y = limitar_valor(jogador["rect"].y, 0, ALTURA_TELA - jogador["rect"].height)
 
-        # Verificação de colisão com a Gema (antigo 'item')
-        if verificar_colisao(jogador["rect"], gema["rect"]):
-            pontos = calcular_pontos(pontos, 10)
+        # Disparando a flecha com o espaço
+        if teclas[pygame.K_SPACE] and not flecha["ativa"]:
+            flecha["rect"].midbottom = jogador["rect"].midtop
+            flecha["ativa"] = True
 
-            # Move a gema de lugar ao coletar
-            gema["rect"].x += 80
-            gema["rect"].y += 50
+        # flecha para cima
+        if flecha["ativa"]:
+            flecha["rect"].y -= FLECHA_VELOCIDADE
 
-            # Se a gema sair da tela, volta para uma posição segura
-            if gema["rect"].x > LARGURA_TELA - gema["rect"].width:
-                gema["rect"].x = 50
-            if gema["rect"].y > ALTURA_TELA - gema["rect"].height:
-                gema["rect"].y = 50
+            # desativa, ao sair da tele
+            if flecha["rect"].bottom < 0:
+                flecha["ativa"] = False
 
-        # Verificação de colisão com o Inimigo
-        if verificar_colisao(jogador["rect"], inimigo["rect"]):
-            vidas = tomar_dano(vidas, 1)
+            # Quando a flecha atinge o inimigo
+            if verificar_colisao(flecha["rect"], inimigo["rect"]):
+                pontos = calcular_pontos(pontos, 10)
+                flecha["ativa"] = False
 
-            # Afasta o inimigo ao colidir
-            inimigo["rect"].x += 80
-            inimigo["rect"].y += 50
-
-            if inimigo["rect"].x > LARGURA_TELA - inimigo["rect"].width:
-                inimigo["rect"].x = 50
-            if inimigo["rect"].y > ALTURA_TELA - inimigo["rect"].height:
-                inimigo["rect"].y = 50
+                # Troca o inimigo de lugar, para simular o spawn
+                inimigo["rect"].x += 80
+                if inimigo["rect"].x > LARGURA_TELA - inimigo["rect"].width:
+                    inimigo["rect"].x = 50
 
         # Regras de fim de jogo e recorde
         if jogador_perdeu(vidas):
@@ -133,10 +129,13 @@ def executar_jogo():
 
         tela.fill(CINZA)
 
-        # Desenhando os elementos na tela passando a imagem e o rect de cada dicionário
-        tela.blit(gema["imagem"], gema["rect"])
+        # elementos na tela
         tela.blit(inimigo["imagem"], inimigo["rect"])
         tela.blit(jogador["imagem"], jogador["rect"])
+
+        # flechaativa
+        if flecha["ativa"]:
+            tela.blit(flecha["imagem"], flecha["rect"])
 
         pygame.display.flip()
 
