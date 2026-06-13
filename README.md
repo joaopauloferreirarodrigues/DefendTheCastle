@@ -1,8 +1,8 @@
-# Nome do Jogo
+# Defend the Castle
 
 Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
 
-Este repositório é um template para os grupos da disciplina. A proposta é começar com uma base funcional e evoluir o jogo ao longo do semestre.
+Versão atual: **Protótipo da Semana 2** — primeira versão executável do jogo.
 
 ## Integrantes do grupo
 
@@ -18,47 +18,31 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 - `assets/`: imagens, fontes e sons.
 - `data/`: arquivos persistentes (recorde/ranking).
 - `tests/`: testes unitários com `pytest`.
-- `docs/`: documentação do projeto, incluindo proposta inicial.
+- `docs/`: documentação do projeto, incluindo a proposta inicial.
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
+O jogador controla um arqueiro que defende um castelo na parte inferior da tela. O arqueiro dispara flechas automaticamente em direção aos inimigos que aparecem na parte superior. O objetivo é eliminar o maior número possível de inimigos antes que eles encostem no arqueiro.
 
-Exemplo:
-
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
+> Nesta versão (Semana 2 — protótipo), o jogo possui apenas um inimigo (morcego) se movendo horizontalmente, sem ondas progressivas. Os demais tipos de inimigos e o sistema de ondas serão implementados nas próximas semanas.
 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
-
-Exemplo:
-
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
+Acertar os inimigos com as flechas do arqueiro, marcando o maior número de pontos possível antes de perder todas as vidas.
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- O arqueiro começa com 3 vidas.
+- O arqueiro dispara flechas automaticamente em intervalos fixos de tempo.
+- Cada inimigo atingido por uma flecha vale 10 pontos.
+- Quando o inimigo encosta no arqueiro, o arqueiro perde 1 vida.
+- A partida termina quando o arqueiro perde todas as vidas.
 
 ## Controles
 
-Informe as teclas ou comandos utilizados no jogo.
-
-Exemplo:
-
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
-- ESC: sair do jogo
+- Seta para esquerda **ou** tecla **A**: mover o arqueiro para a esquerda.
+- Seta para direita **ou** tecla **D**: mover o arqueiro para a direita.
+- Fechar a janela: encerra o jogo.
 
 ## Como executar o projeto
 
@@ -66,7 +50,7 @@ Exemplo:
 
 ```bash
 git clone LINK_DO_REPOSITORIO
-cd NOME_DA_PASTA
+cd Projeto-Final
 pip install -r requirements.txt
 python main.py
 ```
@@ -77,15 +61,21 @@ python main.py
 python -m pytest
 ```
 
-## Checklist mínimo para entrega
+## Organização do código (`src/`)
 
-- Preencher este README com nome final, descrição real, regras e controles do jogo.
-- Atualizar `docs/proposta.MD` com a proposta do grupo.
-- Garantir que o jogo executa com `python main.py`.
-- Garantir que os testes passam com `pytest`.
+- `config.py`: constantes globais (tamanho da tela, cores, velocidades, FPS, caminhos de arquivos).
+- `funcoes.py`: funções de lógica pura (pontuação, vidas, colisão, limite de valor, controle de tiro).
+- `sprites.py`: função para recortar imagens da spritesheet.
+- `dados.py`: leitura e gravação do recorde em arquivo de texto.
+- `jogo.py`: loop principal e funções de criação, atualização e desenho dos elementos do jogo.
 
-## Observações para os alunos
+## Status das entregas
 
-- Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
-- Comentem partes importantes da lógica, principalmente regras do jogo.
-- Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.
+- [x] **Semana 1** — Proposta inicial preenchida em `docs/proposta.MD`.
+- [x] **Semana 2** — Protótipo executável: arqueiro com movimento horizontal, disparo automático de flechas, um inimigo (morcego), colisão e sistema de pontos/vidas.
+- [ ] **Semana 3** — Ondas de inimigos, três tipos de inimigos e ajustes de regras.
+- [ ] **Semana 4** — Versão final, testes completos e apresentação.
+
+## Recursos externos utilizados
+
+- Spritesheet localizada em `assets/imagens/spritesheet.bmp` (template da disciplina).

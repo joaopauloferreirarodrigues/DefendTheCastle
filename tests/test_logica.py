@@ -1,4 +1,9 @@
-from src.funcoes import calcular_pontos, jogador_perdeu, limitar_valor
+from src.funcoes import (
+    calcular_pontos,
+    jogador_perdeu,
+    limitar_valor,
+    pode_atirar,
+)
 
 
 def test_calcular_pontos():
@@ -29,3 +34,13 @@ def test_limitar_valor_acima_do_maximo():
 def test_limitar_valor_dentro_do_intervalo():
     """Deve manter o valor original quando ele ja estiver no intervalo."""
     assert limitar_valor(50, 0, 100) == 50
+
+
+def test_pode_atirar_quando_passou_o_intervalo():
+    """Deve permitir atirar quando ja passou o tempo de intervalo."""
+    assert pode_atirar(1000, 400, 500) is True
+
+
+def test_pode_atirar_quando_ainda_nao_passou():
+    """Nao deve permitir atirar antes do intervalo terminar."""
+    assert pode_atirar(700, 400, 500) is False

@@ -14,7 +14,7 @@ Defend the Castle
 
 Liste os integrantes do grupo.
 
-- Nome 1:Dimitry Gonzales
+- Nome 1: Dimitry Gonzales
 - Nome 2: João Paulo Ferreira Rodrigues
 - Nome 3: Pedro Henrique Soares Silva
 - Nome 4: Samuel Ferreira Guimarães

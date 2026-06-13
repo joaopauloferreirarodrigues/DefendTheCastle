@@ -25,3 +25,8 @@ def limitar_valor(valor, minimo, maximo):
 def verificar_colisao(retangulo_1, retangulo_2):
     """Verifica sobreposição entre dois retângulos do Pygame."""
     return retangulo_1.colliderect(retangulo_2)
+
+
+def pode_atirar(tempo_atual, tempo_ultimo_tiro, intervalo):
+    """Indica se já passou tempo para disparar uma nova flecha."""
+    return tempo_atual - tempo_ultimo_tiro >= intervalo
