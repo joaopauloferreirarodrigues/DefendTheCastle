@@ -92,8 +92,8 @@ Regras do grupo:
 - Regra 1: O arqueiro dispara automaticamente a cada intervalo fixo de tempo.
 - Regra 2: A cada onda concluída, a velocidade e a quantidade de inimigos aumentam
 - Regra 3: O arqueiro começa com 3 vidas
-- Regra 4: Cada ataque inimigo que toca o arqueiro remove 1 vida
-- Regra 5: A partida termina quando o arqueiro perde todas as suas vidas.
+- Regra 4: Cada inimigo que chega no castelo diminui uma vida
+- Regra 5: A partida termina quando 3 inimigos cheguem no castelo ou o arqueiro sobrevive as 10 ondas
 
 ## 7. Condição de vitória
 
@@ -109,7 +109,7 @@ Exemplos:
 
 Condição de vitória:
 
-Sobreviver a 15 hordas
+Sobreviver a 10 hordas
 
 ## 8. Condição de derrota ou encerramento
 
