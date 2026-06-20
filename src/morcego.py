@@ -1,8 +1,8 @@
 from src.config import (
+    LINHA_CASTELO,
+    MORCEGO_PONTOS,
     MORCEGO_VELOCIDADE,
     MORCEGO_VIDA,
-    MORCEGO_PONTOS,
-    LINHA_CASTELO,
 )
 
 
@@ -19,9 +19,9 @@ class Morcego:
         self.rect = imagem.get_rect(topleft=(x, y))
 
         self.pos_y = float(y)
-        self.velocidade_y = MORCEGO_VELOCIDADE   
-        self.vida = MORCEGO_VIDA                 
-        self.pontos = MORCEGO_PONTOS             
+        self.velocidade_y = MORCEGO_VELOCIDADE
+        self.vida = MORCEGO_VIDA
+        self.pontos = MORCEGO_PONTOS
 
     def mover(self):
         """

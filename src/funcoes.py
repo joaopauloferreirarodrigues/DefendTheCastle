@@ -1,22 +1,23 @@
 import pygame
 
 from src.config import (
-    LARGURA_TELA,
     ALTURA_TELA,
+    AMARELO,
     BRANCO,
     CEU,
-    PEDRA,
-    MARROM,
-    VERMELHO,
-    AMARELO,
-    VERDE,
-    JOGADOR_VIDAS,
-    INTERVALO_DISPARO,
     INIMIGOS_BASE,
-    ORDEM_DOS_INIMIGOS,
-    ONDA_MAXIMA,
+    INTERVALO_DISPARO,
+    JOGADOR_VIDAS,
+    LARGURA_TELA,
     LINHA_CASTELO,
+    MARROM,
+    ONDA_MAXIMA,
+    ORDEM_DOS_INIMIGOS,
+    PEDRA,
+    VERDE,
+    VERMELHO,
 )
+
 
 def calcular_pontos(pontos_atual, pontos_ganhos):
     """
@@ -52,6 +53,7 @@ def jogador_perdeu(vidas):
         booleano True se as vidas chegaram a zero (ou menos)
     """
     return vidas <= 0
+
 
 def limitar_valor(valor, minimo, maximo):
     """
@@ -95,6 +97,7 @@ def pode_atirar(tempo_atual, tempo_ultimo_tiro, intervalo):
     """
     return tempo_atual - tempo_ultimo_tiro >= intervalo
 
+
 def calcular_posicao_central(largura_tela, largura_objeto):
     """
     Calcula o x que deixa um objeto centralizado na horizontal.
@@ -125,6 +128,7 @@ def posicao_inicial_x(posicao, largura_tela, largura_arqueiro):
         return largura_tela - largura_arqueiro
     return calcular_posicao_central(largura_tela, largura_arqueiro)
 
+
 def quantidade_de_inimigos(numero_onda, base):
     """
     Calcula quantos inimigos uma onda tem.
@@ -149,6 +153,7 @@ def calcular_espaco_entre_inimigos(largura_tela, quantidade):
         int: a distancia, em pixels, reservada para cada inimigo.
     """
     return largura_tela // quantidade
+
 
 def tipo_da_onda(numero_onda, ordem):
     """
@@ -176,6 +181,7 @@ def venceu_o_jogo(numero_onda, ondas_totais):
     """
     return numero_onda > ondas_totais
 
+
 def nome_valido(nome):
     """
     Indica se o nome digitado pode ser usado.
@@ -185,6 +191,7 @@ def nome_valido(nome):
         bool: True se o nome nao e vazio nem so espacos.
     """
     return len(nome.strip()) > 0
+
 
 def adicionar_caractere(nome, caractere, limite):
     """
@@ -210,6 +217,7 @@ def remover_caractere(nome):
         str: o nome sem a ultima letra (texto vazio continua vazio).
     """
     return nome[:-1]
+
 
 def eh_novo_recorde(pontos, ranking):
     """
@@ -300,6 +308,7 @@ def interpretar_linha_ranking(linha):
         return None
     return (nome, int(partes[1]))
 
+
 def criar_inimigo(tipo, imagens, x, y):
     """
     Cria um inimigo do tipo pedido, na posicao (x, y).
@@ -336,9 +345,10 @@ def gerar_onda(numero_onda, imagens):
     inimigos = []
     for i in range(quantidade):
         x = espaco * i + (espaco // 2) - 20
-        y = -60   
+        y = -60
         inimigos.append(criar_inimigo(tipo, imagens, x, y))
     return inimigos
+
 
 def iniciar_partida(imagens, tempo_atual):
     """
@@ -362,6 +372,7 @@ def iniciar_partida(imagens, tempo_atual):
         "venceu": False,
         "imagens": imagens,
     }
+
 
 def primeiro_inimigo_atingido(flecha, inimigos):
     """
@@ -409,6 +420,7 @@ def processar_acertos(flechas, inimigos):
 
     return flechas_que_continuam, inimigos_vivos, pontos_ganhos
 
+
 def processar_inimigos_no_castelo(inimigos):
     """
     Separa os inimigos que chegaram ao castelo dos que continuam descendo.
@@ -425,6 +437,7 @@ def processar_inimigos_no_castelo(inimigos):
         else:
             continuam.append(inimigo)
     return continuam, chegaram
+
 
 def atualizar_partida(jogo, teclas, tempo_atual):
     """
@@ -465,7 +478,7 @@ def atualizar_partida(jogo, teclas, tempo_atual):
 
     if jogador_perdeu(jogo["vidas"]):
         return "fim"
-    
+
     if len(jogo["inimigos"]) == 0:
         jogo["onda"] = jogo["onda"] + 1
         if venceu_o_jogo(jogo["onda"], ONDA_MAXIMA):
@@ -474,6 +487,7 @@ def atualizar_partida(jogo, teclas, tempo_atual):
         jogo["inimigos"] = gerar_onda(jogo["onda"], jogo["imagens"])
 
     return "jogando"
+
 
 def desenhar_cenario(tela):
     """
@@ -484,7 +498,9 @@ def desenhar_cenario(tela):
         A função só desenha na tela
     """
     tela.fill(CEU)
-    pygame.draw.rect(tela, PEDRA, (0, LINHA_CASTELO, LARGURA_TELA, ALTURA_TELA - LINHA_CASTELO))
+    pygame.draw.rect(
+        tela, PEDRA, (0, LINHA_CASTELO, LARGURA_TELA, ALTURA_TELA - LINHA_CASTELO)
+    )
     for x in range(0, LARGURA_TELA, 52):
         pygame.draw.rect(tela, PEDRA, (x, LINHA_CASTELO - 18, 26, 18))
     pygame.draw.rect(tela, MARROM, (0, ALTURA_TELA - 24, LARGURA_TELA, 24))
@@ -522,8 +538,14 @@ def desenhar_hud(tela, fonte, pontos, recorde_nome, recorde_pontos, vidas, onda)
         Nenhum. A funcao apenas desenha na tela.
     """
     tela.blit(fonte.render(f"Pontos: {pontos}", True, BRANCO), (10, 10))
-    tela.blit(fonte.render(f"Recorde: {recorde_nome} {recorde_pontos}", True, AMARELO), (10, 35))
-    tela.blit(fonte.render(f"Onda: {onda}/{ONDA_MAXIMA}", True, BRANCO), (LARGURA_TELA - 150, 10))
+    tela.blit(
+        fonte.render(f"Recorde: {recorde_nome} {recorde_pontos}", True, AMARELO),
+        (10, 35),
+    )
+    tela.blit(
+        fonte.render(f"Onda: {onda}/{ONDA_MAXIMA}", True, BRANCO),
+        (LARGURA_TELA - 150, 10),
+    )
     # Cada vida vira um quadradinho vermelho, um do lado do outro.
     for i in range(vidas):
         pygame.draw.rect(tela, VERMELHO, (10 + i * 26, 62, 18, 18))
@@ -546,6 +568,7 @@ def desenhar_ranking(tela, fonte, ranking, y_inicial):
         linha = f"{i + 1}. {nome} - {pontos}"
         desenhar_texto_central(tela, fonte, linha, y_inicial + 30 + i * 26, BRANCO)
 
+
 def desenhar_tela_nome(tela, fonte_grande, fonte, nome_digitado, ranking):
     """
     Desenha a tela inicial, onde o jogador digita o nome antes de comecar.
@@ -560,7 +583,9 @@ def desenhar_tela_nome(tela, fonte_grande, fonte, nome_digitado, ranking):
     """
     tela.fill(CEU)
     desenhar_texto_central(tela, fonte_grande, "DEFEND THE CASTLE", 110, BRANCO)
-    desenhar_texto_central(tela, fonte, "Digite seu nome e aperte ENTER para jogar:", 190, BRANCO)
+    desenhar_texto_central(
+        tela, fonte, "Digite seu nome e aperte ENTER para jogar:", 190, BRANCO
+    )
     desenhar_texto_central(tela, fonte_grande, nome_digitado + "_", 240, VERDE)
     desenhar_ranking(tela, fonte, ranking, 330)
 
@@ -584,9 +609,13 @@ def desenhar_tela_fim(tela, fonte_grande, fonte, venceu, nome, pontos, ranking):
         desenhar_texto_central(tela, fonte_grande, "VITORIA!", 110, VERDE)
     else:
         desenhar_texto_central(tela, fonte_grande, "FIM DE JOGO", 110, VERMELHO)
-    desenhar_texto_central(tela, fonte, f"{nome}, voce fez {pontos} pontos", 180, BRANCO)
+    desenhar_texto_central(
+        tela, fonte, f"{nome}, voce fez {pontos} pontos", 180, BRANCO
+    )
     desenhar_ranking(tela, fonte, ranking, 250)
-    desenhar_texto_central(tela, fonte, "Aperte ESPACO para jogar de novo", 540, AMARELO)
+    desenhar_texto_central(
+        tela, fonte, "Aperte ESPACO para jogar de novo", 540, AMARELO
+    )
 
 
 def desenhar_partida(tela, fonte, jogo, recorde_nome, recorde_pontos):
@@ -607,10 +636,19 @@ def desenhar_partida(tela, fonte, jogo, recorde_nome, recorde_pontos):
     for flecha in jogo["flechas"]:
         flecha.desenhar(tela)
     jogo["arqueiro"].desenhar(tela)
-    desenhar_hud(tela, fonte, jogo["pontos"], recorde_nome, recorde_pontos, jogo["vidas"], jogo["onda"])
+    desenhar_hud(
+        tela,
+        fonte,
+        jogo["pontos"],
+        recorde_nome,
+        recorde_pontos,
+        jogo["vidas"],
+        jogo["onda"],
+    )
+
 
 from src.arqueiro import Arqueiro
 from src.esqueleto import Esqueleto
+from src.flecha import Flecha
 from src.morcego import Morcego
 from src.orc import Orc
-from src.flecha import Flecha

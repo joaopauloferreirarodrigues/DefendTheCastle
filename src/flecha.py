@@ -7,8 +7,8 @@ class Flecha:
         Cria a flecha logo acima do arqueiro.
         Parametros:
             imagem (Surface): figura da flecha, ja carregada.
-            x_centro (int): x do centro do arqueiro 
-            y_base (int): y do topo do arqueiro 
+            x_centro (int): x do centro do arqueiro
+            y_base (int): y do topo do arqueiro
         """
         self.imagem = imagem
         self.rect = imagem.get_rect()

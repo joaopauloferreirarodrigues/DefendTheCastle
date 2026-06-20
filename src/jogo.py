@@ -1,44 +1,45 @@
 import pygame
 
 from src.config import (
-    LARGURA_TELA,
     ALTURA_TELA,
-    FPS,
-    TITULO_JOGO,
-    IMAGEM_ARQUEIRO,
-    IMAGEM_ESQUELETO,
-    IMAGEM_MORCEGO,
-    IMAGEM_ORC,
-    IMAGEM_FLECHA,
+    CAMINHO_RANKING,
+    CAMINHO_RECORDE,
     ESCALA_ARQUEIRO,
     ESCALA_ESQUELETO,
+    ESCALA_FLECHA,
     ESCALA_MORCEGO,
     ESCALA_ORC,
-    ESCALA_FLECHA,
-    CAMINHO_RECORDE,
-    CAMINHO_RANKING,
+    FPS,
+    IMAGEM_ARQUEIRO,
+    IMAGEM_ESQUELETO,
+    IMAGEM_FLECHA,
+    IMAGEM_MORCEGO,
+    IMAGEM_ORC,
+    LARGURA_TELA,
     MAX_RANKING,
     TAMANHO_MAX_NOME,
+    TITULO_JOGO,
 )
-from src.sprites import carregar_sprite
 from src.dados import (
     carregar_ranking,
     salvar_ranking,
     salvar_recorde,
 )
 from src.funcoes import (
-    iniciar_partida,
+    adicionar_ao_ranking,
+    adicionar_caractere,
     atualizar_partida,
     desenhar_partida,
-    desenhar_tela_nome,
     desenhar_tela_fim,
-    nome_valido,
-    adicionar_caractere,
-    remover_caractere,
+    desenhar_tela_nome,
     eh_novo_recorde,
-    adicionar_ao_ranking,
+    iniciar_partida,
     melhor_pontuacao,
+    nome_valido,
+    remover_caractere,
 )
+from src.sprites import carregar_sprite
+
 
 def carregar_imagens():
     """
@@ -77,7 +78,7 @@ def executar_jogo():
 
     ranking = carregar_ranking(CAMINHO_RANKING)
     nome = ""
-    estado = "nome"     # estados possiveis: "nome", "jogando", "fim"
+    estado = "nome"  # estados possiveis: "nome", "jogando", "fim"
     jogo = None
     rodando = True
 
@@ -97,7 +98,9 @@ def executar_jogo():
                     elif evento.key == pygame.K_BACKSPACE:
                         nome = remover_caractere(nome)
                     elif evento.unicode != "" and evento.unicode.isprintable():
-                        nome = adicionar_caractere(nome, evento.unicode, TAMANHO_MAX_NOME)
+                        nome = adicionar_caractere(
+                            nome, evento.unicode, TAMANHO_MAX_NOME
+                        )
 
                 elif estado == "fim" and evento.key == pygame.K_SPACE:
                     nome = ""
@@ -108,7 +111,9 @@ def executar_jogo():
         if estado == "jogando":
             estado = atualizar_partida(jogo, teclas, tempo_atual)
             if estado == "fim" and eh_novo_recorde(jogo["pontos"], ranking):
-                ranking = adicionar_ao_ranking(ranking, nome, jogo["pontos"], MAX_RANKING)
+                ranking = adicionar_ao_ranking(
+                    ranking, nome, jogo["pontos"], MAX_RANKING
+                )
                 salvar_ranking(CAMINHO_RANKING, ranking)
                 salvar_recorde(CAMINHO_RECORDE, melhor_pontuacao(ranking)[1])
 
@@ -118,7 +123,9 @@ def executar_jogo():
             recorde_nome, recorde_pontos = melhor_pontuacao(ranking)
             desenhar_partida(tela, fonte, jogo, recorde_nome, recorde_pontos)
         elif estado == "fim":
-            desenhar_tela_fim(tela, fonte_grande, fonte, jogo["venceu"], nome, jogo["pontos"], ranking)
+            desenhar_tela_fim(
+                tela, fonte_grande, fonte, jogo["venceu"], nome, jogo["pontos"], ranking
+            )
 
         pygame.display.flip()
 
