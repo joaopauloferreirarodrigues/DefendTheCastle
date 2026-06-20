@@ -145,14 +145,14 @@ Controlado pelas teclas A e D (ou setas para esquerda/direita), ele atira flecha
 
 Exemplo:
 
-Morcego: rápido, fraco (1 ponto de vida)
-Esqueleto: velocidade média, resistência média (2 pontos de vida)
-Orc: lento, resistente (3 pontos de vida)
+Esqueleto: lento, fraco (1 ponto de vida). É o primeiro inimigo a aparecer.
+Morcego: o mais rápido, fraco (1 ponto de vida).
+Orc: o mais lento e resistente (2 pontos de vida). Precisa de 2 flechas para morrer.
 
 
 Descrição:
 
-Três tipos diferentes de inimigos podem surgir em ondas, atirando na direção do arqueiro
+Três tipos diferentes de inimigos surgem em ondas e descem em direção ao castelo. As ondas seguem a ordem esqueleto, morcego e orc, e essa ordem se repete. A cada onda concluída, a quantidade de inimigos aumenta.
 
 ## Itens, alvos ou objetos de interação
 
@@ -163,7 +163,6 @@ Exemplo:
 Descrição:
 
 Flechas disparadas automaticamente pelo arqueiro
-Poção de vida que restaura vida do arqueiro
 Inimigos derrotados somam pontos ao placar
 
 ## Pontuação, vidas, tempo ou progresso
@@ -234,8 +233,7 @@ Exemplo:
 Recursos previstos:
 
 - Modelos gratuitos de arqueiro, morcego, orc e esqueleto
-- Imagem de castelo medieval como parte do cenário
-- Sons de flecha disparada 
+
 
 Caso não pretenda utilizar recursos externos, escreva:
 

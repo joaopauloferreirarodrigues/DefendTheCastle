@@ -1,15 +1,15 @@
-# Código-fonte (`src`)
+# Código-fonte (`src/`)
 
-Esta pasta contém os módulos principais do jogo.
+Organização dos arquivos:
 
-## Arquivos
+- `config.py`: todos os valores ajustáveis do jogo (tela, cores, velocidades, ondas, ranking, caminhos e sprites). É o lugar para mudar como o jogo se comporta.
+- `funcoes.py`: todas as funções do jogo, divididas em três partes:
+  1. **Regras**: contas simples e puras (pontos, vidas, colisão, ondas, nome, ranking). São as funções testadas pelo pytest.
+  2. **Fluxo da partida**: monta as ondas, inicia e atualiza o estado do jogo.
+  3. **Desenho**: tudo que aparece na tela.
+- `arqueiro.py`, `esqueleto.py`, `morcego.py`, `orc.py`, `flecha.py`: uma classe por arquivo. Os três inimigos (esqueleto, morcego e orc) funcionam do mesmo jeito — descem em linha reta até o castelo. O que muda são os números (velocidade, vida e pontos), que vêm do `config.py`.
+- `sprites.py`: carrega a imagem de um personagem e aplica uma escala.
+- `dados.py`: lê e grava o recorde e o ranking nos arquivos da pasta `data/`.
+- `jogo.py`: o loop principal. Cria a janela, lê o teclado e, a cada quadro, chama as funções de `funcoes.py`.
 
-- `jogo.py`: loop principal, eventos, atualização e renderização.
-- `config.py`: constantes globais (tela, cores, caminhos, FPS).
-- `funcoes.py`: funções auxiliares de regra e lógica.
-- `sprites.py`: carregamento e recorte de spritesheet.
-- `dados.py`: leitura e gravação de dados (recorde/ranking).
-
-## Dica de evolução
-
-Quando o projeto crescer, mantenha módulos pequenos e separados por responsabilidade.
+As classes são importadas no fim de `funcoes.py` para evitar importação circular (as classes usam funções de regra que estão no topo do arquivo).
