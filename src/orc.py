@@ -1,10 +1,9 @@
 from src.config import (
-    LINHA_CASTELO,
-    ORC_PONTOS,
     ORC_VELOCIDADE,
     ORC_VIDA,
+    ORC_PONTOS,
+    LINHA_CASTELO,
 )
-
 
 class Orc:
     def __init__(self, imagem, x, y):
@@ -18,9 +17,9 @@ class Orc:
         self.imagem = imagem
         self.rect = imagem.get_rect(topleft=(x, y))
         self.pos_y = float(y)
-        self.velocidade_y = ORC_VELOCIDADE
-        self.vida = ORC_VIDA
-        self.pontos = ORC_PONTOS
+        self.velocidade_y = ORC_VELOCIDADE   
+        self.vida = ORC_VIDA                
+        self.pontos = ORC_PONTOS             
 
     def mover(self):
         """
@@ -45,6 +44,6 @@ class Orc:
         Parametros:
             tela (Surface): a tela onde desenhar.
         Retorno:
-            Nenhum. A funcao apenas desenha na tela.
+            Nenhum, a funcao apenas desenha na tela.
         """
         tela.blit(self.imagem, self.rect)

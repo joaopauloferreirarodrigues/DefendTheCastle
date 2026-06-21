@@ -1,5 +1,4 @@
-from src.funcoes import formatar_entrada_ranking, interpretar_linha_ranking
-
+from src.funcoes import interpretar_linha_ranking, formatar_entrada_ranking
 
 def salvar_recorde(caminho_arquivo, pontuacao):
     """Salva a pontuacao recorde em um arquivo de texto.
@@ -19,7 +18,7 @@ def carregar_recorde(caminho_arquivo):
     Parametros:
         caminho_arquivo (str): caminho do arquivo (CAMINHO_RECORDE no config).
     Retorno:
-        int: o recorde salvo, ou 0
+        int: o recorde salvo, ou 0 
     """
     try:
         with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
@@ -29,7 +28,6 @@ def carregar_recorde(caminho_arquivo):
             return int(conteudo)
     except (FileNotFoundError, ValueError):
         return 0
-
 
 def carregar_ranking(caminho_arquivo):
     """

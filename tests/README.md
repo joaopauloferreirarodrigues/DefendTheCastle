@@ -4,9 +4,8 @@ Esta pasta contem os testes automatizados do projeto, escritos com `pytest`.
 
 ## Arquivos
 
-- `conftest.py`: configura o pygame sem abrir janela, para
-  que os testes rodem
-- `test_logica.py`: contem todos os testes. 
+- `test_logica.py`: contem todos os testes de logica do jogo.
+
 ## Como executar
 
 ```bash
@@ -20,18 +19,24 @@ python -m pytest -v
 
 ## Cobertura
 
-Sao 72 testes no total. Toda funcao de `src/funcoes.py` e todas as classes tem
-pelo menos um teste, e a maioria tem varios casos (incluindo casos de borda e
-varios `assert not` para confirmar o que NAO deve acontecer). Destaques dos
-testes novos:
+Testes focados em funcoes de logica do jogo, cada teste depende apenas dos argumentos passados para a funcao
 
-- a ordem das ondas (esqueleto primeiro, depois morcego, depois orc);
-- a ordem de velocidade (orc < esqueleto < morcego);
-- o orc sobrevive a 1 tiro e so morre no 2.
+Funcoes testadas:
+
+- pontuacao e vida: `calcular_pontos`, `tomar_dano`, `jogador_perdeu`;
+- movimento: `limitar_valor`;
+- disparo: `pode_atirar`;
+- posicionamento: `calcular_posicao_central`, `posicao_inicial_x`;
+- ondas: `quantidade_de_inimigos`, `calcular_espaco_entre_inimigos`,
+  `tipo_da_onda`, `venceu_o_jogo`;
+- nome do jogador: `nome_valido`, `adicionar_caractere`, `remover_caractere`;
+- ranking: `eh_novo_recorde`, `adicionar_ao_ranking`, `pontos_da_entrada`,
+  `melhor_pontuacao`, `formatar_entrada_ranking`, `interpretar_linha_ranking`;
+- constantes do jogo: ordem de velocidade dos inimigos (orc < esqueleto < morcego).
 
 ## Boas praticas
 
-- Cada funcao ou classe nova deve ganhar um teste aqui.
+- Cada funcao de logica nova deve ganhar um teste aqui.
 - Prefira funcoes pequenas e puras (que so dependem dos argumentos), porque sao
   faceis de testar.
 - Use `assert` para o que deve ser verdade e `assert not` para o que deve ser

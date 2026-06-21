@@ -1,7 +1,7 @@
 import pygame
 
 
-def carregar_sprite(caminho, escala=1):
+def carregar_sprite(caminho, escala=1.0):
     """
     Carrega a imagem de um personagem (PNG ja com fundo transparente).
     Parametros:

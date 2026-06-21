@@ -55,7 +55,7 @@ Procure responder:
 
 Descrição:
 
-Na tela aparece um castelo abaixo que o jogador deve proteger. O jogador controla um arqueiro, se move para a esquerda ou direita na frente do castelo. O arqueiro dispara flechas automaticamente na direção dos inimigos. O jogador precisa se posicionar para eliminar os inimigos. Cada onda de inimigos fica mais rápida e numerosa, aumentando a dificuldade progressivamente.
+Na tela aparece um castelo abaixo que o jogador deve proteger. O jogador controla um arqueiro, se move para a esquerda ou direita na frente do castelo. O arqueiro dispara flechas automaticamente na direção dos inimigos. O jogador precisa se posicionar para eliminar os inimigos. Cada onda de inimigos fica maior, aumentando a dificuldade progressivamente.
 
 ## 5. Objetivo do jogador
 
@@ -145,14 +145,14 @@ Controlado pelas teclas A e D (ou setas para esquerda/direita), ele atira flecha
 
 Exemplo:
 
-Esqueleto: lento, fraco (1 ponto de vida). É o primeiro inimigo a aparecer.
-Morcego: o mais rápido, fraco (1 ponto de vida).
-Orc: o mais lento e resistente (2 pontos de vida). Precisa de 2 flechas para morrer.
+Esqueleto: lento, fraco (1 ponto de vida)
+Morcego: o mais rápido, fraco (1 ponto de vida)
+Orc: o mais lento e resistente (2 pontos de vida), precisa de 2 flechas para morrer
 
 
 Descrição:
 
-Três tipos diferentes de inimigos surgem em ondas e descem em direção ao castelo. As ondas seguem a ordem esqueleto, morcego e orc, e essa ordem se repete. A cada onda concluída, a quantidade de inimigos aumenta.
+Três tipos diferentes de inimigos surgem em ondas e descem em direção ao castelo. As ondas seguem a ordem esqueleto, morcego e orc, e essa ordem se repete. A cada onda a quantidade de inimigos aumenta.
 
 ## Itens, alvos ou objetos de interação
 
@@ -208,14 +208,14 @@ Exemplo:
 
 Organização planejada:
 
-main.py — inicia o jogo e executa o loop principal;
-src/config.py — configurações globais (tamanho da tela, cores, FPS, velocidades);
-src/jogador.py — arqueiro (movimento e disparo automático);
-src/inimigos.py — inimigos (Morcego, Orc, Esqueleto) com comportamentos distintos;
-src/flecha.py — classe da flecha e lógica de colisão;
-src/ondas.py — geração e progressão das ondas;
-src/hud.py — exibição de pontuação, vidas do arqueiro e número da onda;
+main.py — inicia o jogo e executa o loop principal
+src/config.py — configurações globais (tamanho da tela, cores, FPS, velocidades)
+src/arquiero.py — arqueiro (movimento e disparo automático)
+inimigos — morcego.py, orc.py, esqueleto.py 
+src/flecha.py — classe da flecha e lógica de colisão
+src/funcoes.py - todas as funções do jogo
 src/dados.py — leitura e escrita do ranking em arquivo
+src/jogo.py - loop principal
 
 
 
@@ -232,7 +232,7 @@ Exemplo:
 
 Recursos previstos:
 
-- Modelos gratuitos de arqueiro, morcego, orc e esqueleto
+- Modelos gratuitos de arqueiro, morcego, orc, esqueleto e flecha
 
 
 Caso não pretenda utilizar recursos externos, escreva:
@@ -257,7 +257,7 @@ Exemplos:
 Dificuldades previstas:
 
 - Dificuldade 1: Implementar o disparo automático
-- Dificuldade 2: Detectar o dano causado e sofido
+- Dificuldade 2: Detectar o dano causado e sofrido
 - Dificuldade 3: Criar as ondas progressivas 
 - Dificuldade 4: "Balancear" o jogo 
 

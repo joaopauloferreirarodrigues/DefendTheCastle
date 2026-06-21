@@ -1,15 +1,16 @@
 import pygame
 
 from src.config import (
-    ARQUEIRO_POSICAO_INICIAL,
-    JOGADOR_VELOCIDADE,
     LARGURA_TELA,
+    JOGADOR_VELOCIDADE,
     LINHA_CASTELO,
+    ARQUEIRO_POSICAO_INICIAL,
 )
 from src.funcoes import limitar_valor, posicao_inicial_x
 
 
 class Arqueiro:
+
     def __init__(self, imagem):
         """Cria o arqueiro e o posiciona na frente do castelo"""
         self.imagem = imagem

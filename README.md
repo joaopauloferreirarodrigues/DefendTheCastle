@@ -33,7 +33,7 @@ python -m pytest
 ## Estrutura do projeto
 
 - `main.py`: ponto de entrada (só chama o jogo).
-- `src/config.py`: **painel de controle** — todos os valores que dá pra mudar.
+- `src/config.py`: painel de controle  todos os valores que dá pra mudar.
 - `src/funcoes.py`: todas as funções do jogo (regras, fluxo da partida e desenho).
 - `src/arqueiro.py`, `src/esqueleto.py`, `src/morcego.py`, `src/orc.py`, `src/flecha.py`: uma classe por arquivo.
 - `src/sprites.py`: carrega as imagens dos personagens.
